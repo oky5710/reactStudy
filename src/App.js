@@ -1,5 +1,3 @@
-
-import './App.css';
 import React, {useState} from "react";
 import TwitWrite from "./TwitWrite";
 import TwitList from "./TwitList";
