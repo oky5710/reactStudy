@@ -1,8 +1,11 @@
 import React from "react";
 
-export default function TwitList({list,switchMode}){
+export default function TwitList({list, switchMode, removeTwit}){
   const handleClick = ()=>{
     switchMode("write")
+  }
+  const handleRemove = (id) => {
+    removeTwit(id)
   }
   return <>
     {
@@ -22,6 +25,10 @@ export default function TwitList({list,switchMode}){
                 <span>{time}</span>
               </div>
               <p>{twit.content}</p>
+              <div>
+                <button type="button"><img src="/ic-edit.png" alt="수정"/></button>
+                <button type="button" onClick={()=>{handleRemove(twit.id)}}><img src="/ic-close.png" alt="삭제"/></button>
+              </div>
             </li>})
           }
         </ul>
