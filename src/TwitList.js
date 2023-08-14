@@ -1,12 +1,11 @@
 import React from "react";
+import Twit from "./Twit";
 
-export default function TwitList({list, switchMode, removeTwit}){
+export default function TwitList({list, switchMode, removeTwit, editTwit}){
   const handleClick = ()=>{
     switchMode("write")
   }
-  const handleRemove = (id) => {
-    removeTwit(id)
-  }
+
   return <>
     {
       list.length === 0 ? <div>데이터가 없습니다.</div> :
@@ -19,17 +18,13 @@ export default function TwitList({list, switchMode, removeTwit}){
                 (timestamp < 1000*60*60*24) ?
                   `${Math.floor(timestamp/(1000*60*60))}시간 전` :
                   `${Math.floor(timestamp/(1000*60*60*24))}일 전`;
-              return <li key={twit.id}>
-              <div>
-                <strong>{twit.author}</strong>
-                <span>{time}</span>
-              </div>
-              <p>{twit.content}</p>
-              <div>
-                <button type="button"><img src="/ic-edit.png" alt="수정"/></button>
-                <button type="button" onClick={()=>{handleRemove(twit.id)}}><img src="/ic-close.png" alt="삭제"/></button>
-              </div>
-            </li>})
+              return <Twit
+                key={twit.id}
+                {...twit}
+                time={time}
+                removeTwit={removeTwit}
+                editTwit={editTwit}
+                switchMode={switchMode}/>})
           }
         </ul>
     }

@@ -16,12 +16,14 @@ function App() {
   const removeTwit = (id) => {
     setTwits(twits.filter((twit)=>twit.id !== id));
   }
+  const editTwit = (newTwit)=>{
+    setTwits(twits.map((obj)=>newTwit.id === obj.id? newTwit : obj));
+  }
   return (
     <>
         <h1><img src="/twitter.svg" alt="트위터"/></h1>
-        {mode === "list" ? <TwitList list={twits} switchMode={switchMode} removeTwit={removeTwit}/>:
-          <TwitWrite saveTwit={saveTwit} switchMode={switchMode}/> }
-
+        {mode === "list" ? <TwitList list={twits} switchMode={switchMode} removeTwit={removeTwit} editTwit={editTwit}/>:
+          <TwitWrite saveTwit={saveTwit} switchMode={switchMode} /> }
     </>
   );
 }
