@@ -8,8 +8,8 @@ export default function TwitList({list, switchMode, removeTwit, editTwit}){
 
   return <>
     {
-      list.length === 0 ? <div>데이터가 없습니다.</div> :
-        <ul>
+      list.length === 0 ? <div className="no-data">데이터가 없습니다.</div> :
+        <ul className="twit-list">
           {
             list.map((twit)=>{
               const timestamp = new Date().getTime() - twit.time;
@@ -28,6 +28,6 @@ export default function TwitList({list, switchMode, removeTwit, editTwit}){
           }
         </ul>
     }
-    <button type="button" title="트윗 하기" onClick={handleClick}>+</button>
+    <button type="button" title="트윗 하기" onClick={handleClick} className="btn-add-twit">트윗 하기</button>
   </>
 }

@@ -1,3 +1,5 @@
+import "./style/reset.css";
+import "./style/twitter.css";
 import React, {useState} from "react";
 import TwitWrite from "./TwitWrite";
 import TwitList from "./TwitList";
@@ -6,18 +8,19 @@ function App() {
   const [twits, setTwits] = useState([]); // 트윗 목록 저장
   const [mode, setMode] = useState("list"); // write | list 모드에 따라 내용이 바뀌게
   const [index, setIndex] = useState(0);
+
   const switchMode = (state) => {
     setMode(state);
   }
   const saveTwit = (twit) => {
-    setTwits([{...twit, id: index}, ...twits]);
+    setTwits([{...twit, id: index, isLike: false}, ...twits]);
     setIndex(index + 1);
   }
   const removeTwit = (id) => {
     setTwits(twits.filter((twit)=>twit.id !== id));
   }
   const editTwit = (newTwit)=>{
-    setTwits(twits.map((obj)=>newTwit.id === obj.id? newTwit : obj));
+    setTwits(twits.map((obj)=>newTwit.id === obj.id? {...obj, ...newTwit} : obj));
   }
   return (
     <>

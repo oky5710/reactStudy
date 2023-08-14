@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function Twit ({id, author, content, time, removeTwit, editTwit, switchMode}) {
+export default function Twit ({id, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
   const handleRemove = () => {
     removeTwit(id)
   }
@@ -21,23 +21,31 @@ export default function Twit ({id, author, content, time, removeTwit, editTwit, 
     editTwit({
       id,
       author,
+      isLike,
       content: newTwit,
       time: new Date().getTime()
     });
     switchMode("list");
     setIsWrite(false);
   }
+  const handleLike = () => {
+    editTwit({
+      id,
+      isLike: !isLike,
+    });
+  }
 
   return <li key={id}>
-    <div>
+    <div className="twit-title">
       <strong>{author}</strong>
       <span>{time}</span>
     </div>
     {isWrite? <textarea value={newTwit} onChange={handleChange}/>:<p>{content}</p> }
-    {!isWrite? <div>
+    {!isWrite? <div className="btns-twit-list">
       <button type="button" onClick={handleEdit}><img src="/ic-edit.png" alt="수정"/></button>
       <button type="button" onClick={handleRemove}><img src="/ic-close.png" alt="삭제"/></button>
-    </div> : <div>
+      <button type="button" onClick={handleLike} className={(isLike)? "btn-like-full": "btn-like-empty"}>{isLike? "♥︎":"♡"}</button>
+    </div> : <div className="btns-twit-list">
       <button type="button" onClick={handleSave}><img src="/ic-save.png" alt="저장"/></button>
       <button type="button" onClick={handleCancel}><img src="/ic-cancel.png" alt="취소"/></button>
     </div>}

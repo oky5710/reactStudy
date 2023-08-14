@@ -1,0 +1,130 @@
+h1 {
+  text-align: center;
+  padding:16px;
+  border-bottom: 1px solid #ccc;
+}
+h1 img {
+  height:40px;
+}
+.no-data {
+  text-align: center;
+  padding:40px 0;
+}
+.btn-add-twit {
+  position:fixed;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-color:#28A9E0;
+  color:#fff;
+  font-size:34px;
+  font-weight:bold;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-indent:-9999px;
+  right:30px;
+  bottom:30px;
+}
+.btn-add-twit::before, .btn-add-twit::after {
+  position:absolute;
+  content:"";
+  width:3px;
+  height:20px;
+  border-radius:3px;
+  background-color:#fff;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+.btn-add-twit::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.form-twit {
+  padding:20px;
+}
+.form-twit input, .form-twit textarea {
+  width:100%;
+  border:1px solid #ccc;
+  box-sizing: border-box;
+  padding:0 10px;
+}
+.form-twit input {
+  line-height:40px;
+  padding:0 10px;
+}
+.form-twit textarea {
+  padding:10px;
+  height:80px;
+  margin-top:10px;
+}
+.btns-twit {
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+.btns-twit button {
+  border-radius:20px;
+  line-height:40px;
+  padding:0 20px;
+  font-weight:bold;
+}
+.btn-twit {
+  background-color:#28A9E0;
+  color:#fff;
+}
+.btn-cancel-twit {
+  color:#28A9E0;
+  border:1px solid #28A9E0;
+}
+.twit-list {
+  padding:20px;
+}
+.twit-list li {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+.twit-list li p {
+  white-space: pre-wrap;
+  line-height:1.3;
+}
+
+.btns-twit-list {
+  margin-top:10px;
+  display:flex;
+  gap:30px;
+  align-items: center;
+}
+.btns-twit-list button {
+  line-height:0;
+}
+.twit-title{
+  margin-bottom:10px;
+  display:flex;
+  gap:10px;
+}
+.twit-title strong {
+  font-size:16px;
+}
+.twit-title span {
+  color:#999;
+}
+.twit-list textarea {
+  padding:10px;
+  height:80px;
+  width:100%;
+  border:1px solid #ccc;
+  box-sizing: border-box;
+}
+.btn-like-full {
+  color:#e03131;
+}
+.btn-like-full, .btn-like-empty {
+  font-size:22px;
+  transition:0.2s;
+}
+.error {
+  color:#e03131;
+  margin-top:5px;
+}
