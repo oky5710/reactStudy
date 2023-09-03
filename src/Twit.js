@@ -2,6 +2,7 @@ import React, {useMemo, useState} from "react";
 import axios from "axios";
 
 export default function Twit({id, image = null, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
+  const [loading, setLoading] = useState(false);
   const handleRemove = () => {
     removeTwit(id)
   }
@@ -38,15 +39,17 @@ export default function Twit({id, image = null, author, content, time, isLike, r
   const [picture, setPicture] = useState(image);
   useMemo(async () => {
     if (image === null) {
+      setLoading(true)
       const {data} = await axios.get("https://cataas.com/api/tags");
       const tag = data[Math.floor(Math.random() * data.length)]
-      setPicture(`https://cataas.com/cat/${tag}?width=48&type=sq&limit=1`)
+      setPicture(`https://cataas.com/cat/${tag}?width=48&type=sq`);
+      setLoading(false)
     }
   }, [image])
 
   return <li key={id}>
-    <img src={picture} alt={author}/>
-    <div>
+    <img src={loading ? "/loading.gif" : picture} alt={author}/>
+    <div className="twit-right">
       <div className="twit-title">
         <strong>{author}</strong>
         <span>{time}</span>
