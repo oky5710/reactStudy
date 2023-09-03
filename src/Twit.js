@@ -42,7 +42,7 @@ export default function Twit({id, image = null, author, content, time, isLike, r
       const tag = data[Math.floor(Math.random() * data.length)]
       setPicture(`https://cataas.com/cat/${tag}?width=48&type=sq&limit=1`)
     }
-  }, [])
+  }, [image])
 
   return <li key={id}>
     <img src={picture} alt={author}/>
