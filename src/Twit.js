@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
+import axios from "axios";
 
-export default function Twit ({id, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
+export default function Twit({id, image = null, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
   const handleRemove = () => {
     removeTwit(id)
   }
   const [newTwit, setNewTwit] = useState(content);
-  const handleEdit = () =>{
+  const handleEdit = () => {
     setIsWrite(true)
   }
   const [isWrite, setIsWrite] = useState(false);
@@ -34,20 +35,32 @@ export default function Twit ({id, author, content, time, isLike, removeTwit, ed
       isLike: !isLike,
     });
   }
+  const [picture, setPicture] = useState(image);
+  useMemo(async () => {
+    if (image === null) {
+      const {data} = await axios.get("https://cataas.com/api/tags");
+      const tag = data[Math.floor(Math.random() * data.length)]
+      setPicture(`https://cataas.com/cat/${tag}?width=48&type=sq&limit=1`)
+    }
+  }, [])
 
   return <li key={id}>
-    <div className="twit-title">
-      <strong>{author}</strong>
-      <span>{time}</span>
+    <img src={picture} alt={author}/>
+    <div>
+      <div className="twit-title">
+        <strong>{author}</strong>
+        <span>{time}</span>
+      </div>
+      {isWrite ? <textarea value={newTwit} onChange={handleChange}/> : <p>{content}</p>}
+      {!isWrite ? <div className="btns-twit-list">
+        <button type="button" onClick={handleEdit}><img src="/ic-edit.png" alt="수정"/></button>
+        <button type="button" onClick={handleRemove}><img src="/ic-close.png" alt="삭제"/></button>
+        <button type="button" onClick={handleLike}
+                className={(isLike) ? "btn-like-full" : "btn-like-empty"}>{isLike ? "♥︎" : "♡"}</button>
+      </div> : <div className="btns-twit-list">
+        <button type="button" onClick={handleSave}><img src="/ic-save.png" alt="저장"/></button>
+        <button type="button" onClick={handleCancel}><img src="/ic-cancel.png" alt="취소"/></button>
+      </div>}
     </div>
-    {isWrite? <textarea value={newTwit} onChange={handleChange}/>:<p>{content}</p> }
-    {!isWrite? <div className="btns-twit-list">
-      <button type="button" onClick={handleEdit}><img src="/ic-edit.png" alt="수정"/></button>
-      <button type="button" onClick={handleRemove}><img src="/ic-close.png" alt="삭제"/></button>
-      <button type="button" onClick={handleLike} className={(isLike)? "btn-like-full": "btn-like-empty"}>{isLike? "♥︎":"♡"}</button>
-    </div> : <div className="btns-twit-list">
-      <button type="button" onClick={handleSave}><img src="/ic-save.png" alt="저장"/></button>
-      <button type="button" onClick={handleCancel}><img src="/ic-cancel.png" alt="취소"/></button>
-    </div>}
   </li>
 }
