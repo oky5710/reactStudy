@@ -6,9 +6,11 @@ export default function Twit({id, image = null, author, content, time, isLike, r
   const handleRemove = () => {
     removeTwit(id)
   }
-  const [newTwit, setNewTwit] = useState(content);
+
+  const [newTwit, setNewTwit] = useState(null);
   const handleEdit = () => {
-    setIsWrite(true)
+    setIsWrite(true);
+    setNewTwit(content);
   }
   const [isWrite, setIsWrite] = useState(false);
   const handleChange = (e) => {

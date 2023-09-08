@@ -29,7 +29,8 @@ function App() {
   }
   useEffect(() => {
     axios.get("https://randomuser.me/api/?results=10").then((res) => {
-      setTwits(res.data.results.map(user => ({
+      setTwits(res.data.results.map((user, i) => ({
+        id: i,
         author: user.name.first,
         time: new Date(user.registered.date).getTime(),
         content: randomTwit(),
