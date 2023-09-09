@@ -50,7 +50,6 @@ function Twit({id, image = null, author, content, time, isLike, removeTwit, edit
       setLoading(false)
     }
   }, [image])
-
   return <li key={id}>
     <img src={loading ? "/loading.gif" : picture} alt={author}/>
     <div className="twit-right">

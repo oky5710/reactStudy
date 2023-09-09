@@ -1,7 +1,7 @@
 import React from "react";
 import Twit from "./Twit";
 
-export default function TwitList({list, switchMode, removeTwit, editTwit}) {
+function TwitList({list, switchMode, removeTwit, editTwit}) {
   const handleClick = () => {
     switchMode("write")
   }
@@ -31,3 +31,5 @@ export default function TwitList({list, switchMode, removeTwit, editTwit}) {
     <button type="button" title="트윗 하기" onClick={handleClick} className="btn-add-twit">트윗 하기</button>
   </>
 }
+
+export default React.memo(TwitList);
