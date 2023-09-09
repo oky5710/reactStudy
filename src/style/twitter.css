@@ -164,3 +164,9 @@ h1 img {
   color: #e03131;
   margin-top: 5px;
 }
+
+.today-twit {
+  padding: 10px;
+  background-color: #eee;
+  text-align: center;
+}

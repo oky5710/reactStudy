@@ -1,12 +1,11 @@
 import React, {useMemo, useState} from "react";
 import axios from "axios";
 
-export default function Twit({id, image = null, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
+function Twit({id, image = null, author, content, time, isLike, removeTwit, editTwit, switchMode}) {
   const [loading, setLoading] = useState(false);
   const handleRemove = () => {
     removeTwit(id)
   }
-
   const [newTwit, setNewTwit] = useState(null);
   const handleEdit = () => {
     setIsWrite(true);
@@ -42,8 +41,11 @@ export default function Twit({id, image = null, author, content, time, isLike, r
   useMemo(async () => {
     if (image === null) {
       setLoading(true)
+      //태그 호출
       const {data} = await axios.get("https://cataas.com/api/tags");
-      const tag = data[Math.floor(Math.random() * data.length)]
+      // 태그를 랜덤으로 하나 선택
+      const tag = data[Math.floor(Math.random() * data.length)];
+      // 고양이 사진 불러 오기
       setPicture(`https://cataas.com/cat/${tag}?width=48&type=sq`);
       setLoading(false)
     }
@@ -69,3 +71,5 @@ export default function Twit({id, image = null, author, content, time, isLike, r
     </div>
   </li>
 }
+
+export default React.memo(Twit)
